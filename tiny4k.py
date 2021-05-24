@@ -161,6 +161,7 @@ class Crawl:
                                 })
         soup = BeautifulSoup(response.text, 'html.parser')
         self.source = soup
+        print(self.source)
 
     def getLinks(self):
         links = self.source.find_all('a',{'class' : 'video-title'})
