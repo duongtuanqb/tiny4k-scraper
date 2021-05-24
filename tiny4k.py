@@ -17,6 +17,7 @@ class Video:
         print(f'scraping {url}')
         self.url = url
         self.original_url = url
+        self.proxies = utilities.getProxy()
         self.getPage()
         self.getInfo()
         self.getStreams()
@@ -49,7 +50,7 @@ class Video:
         response = requests.get(url=self.url,
                                 headers={
                                     'cookie': COOKIE
-                                },proxies=utilities.getProxy())
+                                },proxies=self.proxies)
         soup = BeautifulSoup(response.text, 'html.parser')
         self.source = soup
 

@@ -18,8 +18,9 @@ def download(url, dst, cookie=None,chunk_size=1024*1024):
     @param: url to download file
     @param: dst place to put the file
     """
+    proxies = getProxy()
     while True:
-        response = requests.head(url,headers={'cookie':cookie})
+        response = requests.head(url,headers={'cookie':cookie},proxies=proxies)
         print(response.headers)
         if response.headers.get('Location'):
             url = response.headers['Location']
@@ -39,7 +40,7 @@ def download(url, dst, cookie=None,chunk_size=1024*1024):
     pbar = tqdm(
         total=file_size, initial=first_byte,
         unit='B', unit_scale=True, desc=url.split('/')[-1])
-    req = requests.get(url, headers=header, stream=True)
+    req = requests.get(url, headers=header, stream=True,proxies=proxies)
     with(open(dst, 'ab')) as f:
         for chunk in req.iter_content(chunk_size=chunk_size):
             if chunk:
