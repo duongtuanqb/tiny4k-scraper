@@ -156,9 +156,10 @@ class Crawl:
 
     def getPage(self):
         response = requests.get(url=self.url+str(self.page),
-                                headers={
-                                    'cookie': COOKIE
-                                })
+                        headers={
+                            'cookie': COOKIE
+                        },
+                        proxy=utilities.getProxy())
         soup = BeautifulSoup(response.text, 'html.parser')
         self.source = soup
         print(self.source)
@@ -167,6 +168,7 @@ class Crawl:
         links = self.source.find_all('a',{'class' : 'video-title'})
         return links
 
+crawl = Crawl()
 # video = Video('https://members.tiny4k.com/video/bubbly-spinner')
 # video.save()
 

@@ -3,6 +3,7 @@ from tqdm import tqdm
 import os
 import random
 import string
+import json
 
 def randomName(length=10):
     letters = string.ascii_lowercase
@@ -50,3 +51,12 @@ def download(url, dst, cookie=None,chunk_size=1024*1024):
 def aria2c(url,dst,cookie):
     os.system(f'aria2c "{url}" -o "{dst}" --header="Cookie: {cookie}"')
 
+def getProxy():
+    data = json.loads(open('proxy.json').read())
+    sv = random.randrange(0,len(data)-1)
+    proxy = data[sv]
+    proxies = {
+        'http': 'http://{}@{}:{}'.format(proxy['auth'],proxy['ip'],proxy['port']),
+        'https' : 'http://{}@{}:{}'.format(proxy['auth'],proxy['ip'],proxy['port'])
+    }   
+    return proxies
