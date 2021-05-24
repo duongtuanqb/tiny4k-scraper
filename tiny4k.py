@@ -49,7 +49,7 @@ class Video:
         response = requests.get(url=self.url,
                                 headers={
                                     'cookie': COOKIE
-                                })
+                                },proxies=utilities.getProxy())
         soup = BeautifulSoup(response.text, 'html.parser')
         self.source = soup
 
@@ -159,7 +159,7 @@ class Crawl:
                         headers={
                             'cookie': COOKIE
                         },
-                        proxy=utilities.getProxy())
+                        proxies=utilities.getProxy())
         soup = BeautifulSoup(response.text, 'html.parser')
         self.source = soup
         print(self.source)
@@ -168,7 +168,7 @@ class Crawl:
         links = self.source.find_all('a',{'class' : 'video-title'})
         return links
 
-crawl = Crawl()
+
 # video = Video('https://members.tiny4k.com/video/bubbly-spinner')
 # video.save()
 
