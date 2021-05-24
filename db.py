@@ -1,8 +1,8 @@
 from mongoengine import Document, connect
 from mongoengine.fields import BooleanField, ReferenceField, StringField, ListField
 
-# connect('mongodb+srv://admin:bovDxKtwUSmeABPr@cluster0.ijhu7.mongodb.net/nhulan?retryWrites=true&w=majority')
-connect('nhulan')
+connect('nhulan',host='mongodb+srv://admin:bovDxKtwUSmeABPr@cluster0.ijhu7.mongodb.net/?retryWrites=true&w=majority')
+# connect('nhulan')
 
 class Studio(Document):
     name = StringField(required=True, unique=True)
