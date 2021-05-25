@@ -11,11 +11,16 @@ def extractFileId(links):
     print(fileIDs)
     return fileIDs
 
-def upload(file_obj,filename,parent):
-    file = drive.CreateFile({"title":filename,'parents': [{'id': parent}]})
+def upload(file_obj,filename,parent,team_drive):
+    file = drive.CreateFile({"title":filename,
+        'parents': [{
+        'kind': 'drive#fileLink',
+        'teamDriveId': team_drive,
+        'id': parent
+    }]})
     file.SetContentFile(file_obj)
     print(f'uploading to: {parent} - title: {filename}')
-    file.Upload()
+    file.Upload(param={'supportsTeamDrives': True})
     return file['id']
 
 def create_credential():
