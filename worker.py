@@ -32,8 +32,6 @@ def scrapeTask(url):
         return 'successful'
     except:
         logging.exception('err')
-        if os.path.isfile(new_video.file_name):
-            os.remove(new_video.file_name)
         return 'unsucessful'
 
 

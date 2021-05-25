@@ -48,11 +48,15 @@ class Video:
         return video
 
     def uploadDrive(self):
-        self.file_name = utilities.randomName()+'.mp4'
-        utilities.download(self.videos[-1]['url'],self.file_name,COOKIE)
-        file_id = gDriveLib.upload(self.file_name,self.title+'.mp4',DRIVE,TEAM_DRIVE)
-        os.remove(self.file_name)
-        self.drive = file_id
+        try:
+            self.file_name = utilities.randomName()+'.mp4'
+            utilities.download(self.videos[-1]['url'],self.file_name,COOKIE)
+            file_id = gDriveLib.upload(self.file_name,self.title+'.mp4',DRIVE,TEAM_DRIVE)
+            os.remove(self.file_name)
+            self.drive = file_id
+        except Exception as e:
+            os.remove(self.file_name)
+            raise e
 
     def getPage(self):
         response = requests.get(url=self.url,
