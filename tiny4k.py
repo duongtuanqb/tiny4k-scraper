@@ -42,7 +42,8 @@ class Video:
             actors = self.actors,
             screencaps = self.screencaps,
             pictures = self.pictures,
-            drive = self.drive
+            drive = self.drive,
+            slug = utilities.generateSlug(self.title)
         )
         video.save()
         return video

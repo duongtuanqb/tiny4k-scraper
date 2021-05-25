@@ -24,6 +24,7 @@ class Image(Document):
 class Video(Document):
     title = StringField(required=True)
     url = StringField(required=True, unique=True)
+    slug = StringField(required=True, unique=True)
     thumbnail = ReferenceField(Image)
     drive = StringField(required=True)
     studio = ReferenceField(Studio)

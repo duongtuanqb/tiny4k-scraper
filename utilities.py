@@ -61,3 +61,8 @@ def getProxy():
         'https' : 'http://{}@{}:{}'.format(proxy['auth'],proxy['ip'],proxy['port'])
     }   
     return proxies
+
+def generateSlug(string):
+    string = '-'.join(string.split(' ')).lower()
+    string = ''.join( c for c in string if  c not in '!@#$%^&*()+=::"?/\\{[}]`~' )
+    return string
