@@ -50,7 +50,7 @@ class Video:
     def uploadDrive(self):
         self.file_name = utilities.randomName()
         utilities.download(self.videos[-1]['url'],self.file_name,COOKIE)
-        file_id = gDriveLib.upload(self.file_name,self.title+'.mp4',DRIVE)
+        file_id = gDriveLib.upload(self.file_name,self.title+'.mp4',DRIVE,TEAM_DRIVE)
         os.remove(self.file_name)
         self.drive = file_id
 
