@@ -1,6 +1,6 @@
 from celery.utils.log import get_task_logger
 from celery import Celery
-import tiny4k
+import lubed
 import logging
 import os
 import db
@@ -10,7 +10,7 @@ logger = get_task_logger(__name__)
 
 @celery_app.task
 def crawlTask():
-    tiny4k.Crawl()
+    lubed.Crawl()
 
 @celery_app.task
 def startScrape():
@@ -26,7 +26,7 @@ def startScrape():
 @celery_app.task
 def scrapeTask(url):
     try:
-        new_video = tiny4k.Video(url)
+        new_video = lubed.Video(url)
         new_video.save()
         db.Task.objects(url=url).update_one(processed=True)
         return 'successful'
